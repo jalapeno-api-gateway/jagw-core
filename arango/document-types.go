@@ -89,3 +89,11 @@ type LSSRv6SID struct {
 	SRv6SID              string						`json:"srv6_sid,omitempty"`
 }
 
+
+type LSNodeEdge struct {
+	Key                  string						`json:"_key,omitempty"`
+	ID                   string						`json:"_id,omitempty"`
+	From	             string						`json:"_from,omitempty"`
+	To		             string						`json:"_to,omitempty"`
+	Link	             string						`json:"link,omitempty"`
+}

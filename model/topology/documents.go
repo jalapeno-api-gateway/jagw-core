@@ -89,3 +89,10 @@ type LSSRv6SID struct {
 	SRv6SID              string
 }
 
+type LSNodeEdge struct {
+	Key                  string
+	ID                   string
+	To					 string
+	From	             string
+	Link				 string
+}

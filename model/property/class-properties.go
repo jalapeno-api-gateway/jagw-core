@@ -99,3 +99,11 @@ var AllLoopbackInterfaceProperties = []string{
 	State,
 	LastStateTransitionTime,
 }
+
+var AllLSNodeEdgeProperties = []string{
+	Key,
+	ID,
+	From,
+	To,
+	Link,
+}

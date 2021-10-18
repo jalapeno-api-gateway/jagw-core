@@ -98,3 +98,13 @@ func ConvertLSSRv6SID(doc arango.LSSRv6SID) LSSRv6SID {
 		SRv6SID: doc.SRv6SID,
 	}
 }
+
+func ConvertLSNodeEdge(doc arango.LSNodeEdge) LSNodeEdge {
+	return LSNodeEdge{
+		Key: doc.Key,
+		ID: doc.ID,
+		From: doc.From,
+		To: doc.To,
+		Link: doc.Link,
+	}
+}

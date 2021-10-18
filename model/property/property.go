@@ -37,4 +37,7 @@ const (
 	PacketsReceived = "PacketsReceived"
 	State = "State"
 	LastStateTransitionTime = "LastStateTransitionTime"
+	From = "From"
+	To = "To"
+	Link = "Link"
 )

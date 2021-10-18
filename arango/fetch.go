@@ -36,6 +36,13 @@ func FetchLSSRv6SID(ctx context.Context, key string) LSSRv6SID {
 	return document
 }
 
+func FetchLSNodeEdge(ctx context.Context, key string) LSNodeEdge {
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge FILTER d._key == \"" + key + "\" RETURN d");
+	var document LSNodeEdge
+	readDocument(cursor.ReadDocument(ctx, &document))
+	return document
+}
+
 //
 // ---> FETCH ALL <---
 //
@@ -66,7 +73,7 @@ func FetchAllLSLinks(ctx context.Context) []LSLink {
 	return documents
 }
 
-func FetchAllLSPrefix(ctx context.Context) []LSPrefix {
+func FetchAllLSPrefixes(ctx context.Context) []LSPrefix {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSPrefix RETURN d");
 	var documents []LSPrefix
 	for {
@@ -79,11 +86,24 @@ func FetchAllLSPrefix(ctx context.Context) []LSPrefix {
 	return documents
 }
 
-func FetchAllLSSRv6SID(ctx context.Context) []LSSRv6SID {
+func FetchAllLSSRv6SIDs(ctx context.Context) []LSSRv6SID {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSSRv6SID RETURN d");
 	var documents []LSSRv6SID
 	for {
 		var document LSSRv6SID
+		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+			break
+		}
+		documents = append(documents, document)
+	}
+	return documents
+}
+
+func FetchAllLSNodeEdges(ctx context.Context) []LSNodeEdge {
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge RETURN d");
+	var documents []LSNodeEdge
+	for {
+		var document LSNodeEdge
 		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
 			break
 		}
