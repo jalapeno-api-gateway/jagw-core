@@ -37,7 +37,7 @@ func FetchLsSrv6Sid(ctx context.Context, key string) LSSRv6SID {
 }
 
 func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge FILTER d._key == \"" + key + "\" RETURN d");
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Edge FILTER d._key == \"" + key + "\" RETURN d");
 	var document LSNode_Edge
 	readDocument(cursor.ReadDocument(ctx, &document))
 	return document
