@@ -8,7 +8,7 @@ const (
 	RouterIp = "RouterIp"
 	PeerHash = "PeerHash"
 	PeerIp = "PeerIp"
-	PeerASN = "PeerASN"
+	PeerAsn = "PeerASN"
 	Timestamp = "Timestamp"
 	IgpRouterId = "IgpRouterId"
 	Asn = "Asn"
