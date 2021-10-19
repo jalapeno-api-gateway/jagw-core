@@ -90,7 +90,7 @@ type LSSRv6SID struct {
 }
 
 
-type LSNodeEdge struct {
+type LSNode_Edge struct {
 	Key                  string						`json:"_key,omitempty"`
 	ID                   string						`json:"_id,omitempty"`
 	From	             string						`json:"_from,omitempty"`

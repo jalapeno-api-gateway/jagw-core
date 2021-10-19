@@ -99,7 +99,7 @@ func ConvertLsSrv6Sid(doc arango.LSSRv6SID) LsSrv6Sid {
 	}
 }
 
-func ConvertLsNodeEdge(doc arango.LSNodeEdge) LsNodeEdge {
+func ConvertLsNodeEdge(doc arango.LSNode_Edge) LsNodeEdge {
 	return LsNodeEdge{
 		Key: doc.Key,
 		Id: doc.ID,

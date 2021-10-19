@@ -36,9 +36,9 @@ func FetchLsSrv6Sid(ctx context.Context, key string) LSSRv6SID {
 	return document
 }
 
-func FetchLsNodeEdge(ctx context.Context, key string) LSNodeEdge {
+func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge FILTER d._key == \"" + key + "\" RETURN d");
-	var document LSNodeEdge
+	var document LSNode_Edge
 	readDocument(cursor.ReadDocument(ctx, &document))
 	return document
 }
@@ -99,11 +99,11 @@ func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
 	return documents
 }
 
-func FetchAllLsNodeEdges(ctx context.Context) []LSNodeEdge {
+func FetchAllLsNodeEdges(ctx context.Context) []LSNode_Edge {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge RETURN d");
-	var documents []LSNodeEdge
+	var documents []LSNode_Edge
 	for {
-		var document LSNodeEdge
+		var document LSNode_Edge
 		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
 			break
 		}
