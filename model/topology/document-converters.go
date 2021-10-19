@@ -2,107 +2,107 @@ package topology
 
 import "github.com/jalapeno-api-gateway/jagw-core/arango"
 
-func ConvertLSNode(doc arango.LSNode) LSNode {
-	return LSNode{
-		ID: doc.ID,
+func ConvertLsNode(doc arango.LSNode) LsNode {
+	return LsNode{
+		Id: doc.ID,
 		Key: doc.Key,
 		RouterHash: doc.RouterHash,
-		DomainID: doc.DomainID,
-		RouterIP: doc.RouterIP,
+		DomainId: doc.DomainID,
+		RouterIp: doc.RouterIP,
 		PeerHash: doc.PeerHash,
-		PeerIP: doc.PeerIP,
-		PeerASN: doc.PeerASN,
+		PeerIp: doc.PeerIP,
+		PeerAsn: doc.PeerASN,
 		Timestamp: doc.Timestamp,
-		IGPRouterID: doc.IGPRouterID,
-		ASN: doc.ASN,
-		MTID: convertMTIDSlice(doc.MTID),
-		AreaID: doc.AreaID,
+		IgpRouterId: doc.IGPRouterID,
+		Asn: doc.ASN,
+		Mtid: convertMtidSlice(doc.MTID),
+		AreaId: doc.AreaID,
 		Protocol: doc.Protocol,
-		ProtocolID: doc.ProtocolID,
+		ProtocolId: doc.ProtocolID,
 		Name: doc.Name,
 		IsPrepolicy: doc.IsPrepolicy,
-		IsAdjRIBIn: doc.IsAdjRIBIn,
+		IsAdjRibIn: doc.IsAdjRIBIn,
 	}
 }
 
-func ConvertLSLink(doc arango.LSLink) LSLink {
-	return LSLink{
-		ID: doc.ID,
+func ConvertLsLink(doc arango.LSLink) LsLink {
+	return LsLink{
+		Id: doc.ID,
 		Key: doc.Key,
 		RouterHash: doc.RouterHash,
-		RouterIP: doc.RouterIP,
-		DomainID: doc.DomainID,
+		RouterIp: doc.RouterIP,
+		DomainId: doc.DomainID,
 		PeerHash: doc.PeerHash,
-		PeerIP: doc.PeerIP,
-		PeerASN: doc.PeerASN,
+		PeerIp: doc.PeerIP,
+		PeerAsn: doc.PeerASN,
 		Timestamp: doc.Timestamp,
-		IGPRouterID: doc.IGPRouterID,
+		IgpRouterId: doc.IGPRouterID,
 		Protocol: doc.Protocol,
-		AreaID: doc.AreaID,
+		AreaId: doc.AreaID,
 		Nexthop: doc.Nexthop,
-		MTID: convertMTID(doc.MTID),
-		LocalLinkIP: doc.LocalLinkIP,
-		RemoteLinkIP: doc.RemoteLinkIP,
-		IGPMetric: doc.IGPMetric,
+		Mtid: convertMtid(doc.MTID),
+		LocalLinkIp: doc.LocalLinkIP,
+		RemoteLinkIp: doc.RemoteLinkIP,
+		IgpMetric: doc.IGPMetric,
 		RemoteNodeHash: doc.RemoteNodeHash,
 		LocalNodeHash: doc.LocalNodeHash,
-		RemoteIGPRouterID: doc.RemoteIGPRouterID,
+		RemoteIgpRouterId: doc.RemoteIGPRouterID,
 	}
 }
 
-func ConvertLSPrefix(doc arango.LSPrefix) LSPrefix {
-	return LSPrefix{
+func ConvertLsPrefix(doc arango.LSPrefix) LsPrefix {
+	return LsPrefix{
 		Key: doc.Key,
-		ID: doc.ID,
+		Id: doc.ID,
 		RouterHash: doc.RouterHash,
-		RouterIP: doc.RouterIP,
-		DomainID: doc.DomainID,
+		RouterIp: doc.RouterIP,
+		DomainId: doc.DomainID,
 		PeerHash: doc.PeerHash,
-		PeerIP: doc.PeerIP,
-		PeerASN: doc.PeerASN,
+		PeerIp: doc.PeerIP,
+		PeerAsn: doc.PeerASN,
 		Timestamp: doc.Timestamp,
-		IGPRouterID: doc.IGPRouterID,
+		IgpRouterId: doc.IGPRouterID,
 		Protocol: doc.Protocol,
-		AreaID: doc.AreaID,
+		AreaId: doc.AreaID,
 		Nexthop: doc.Nexthop,
 		LocalNodeHash: doc.LocalNodeHash,
-		MTID: convertMTID(doc.MTID),
+		Mtid: convertMtid(doc.MTID),
 		Prefix: doc.Prefix,
 		PrefixLen: doc.PrefixLen,
 		PrefixMetric: doc.PrefixMetric,
 		IsPrepolicy: doc.IsPrepolicy,
-		IsAdjRIBIn: doc.IsAdjRIBIn,
+		IsAdjRibIn: doc.IsAdjRIBIn,
 	}
 }
 
-func ConvertLSSRv6SID(doc arango.LSSRv6SID) LSSRv6SID {
-	return LSSRv6SID{
+func ConvertLsSRv6SID(doc arango.LSSRv6SID) LsSrv6Sid {
+	return LsSrv6Sid{
 		Key: doc.Key,
-		ID: doc.ID,
+		Id: doc.ID,
 		RouterHash: doc.RouterHash,
-		RouterIP: doc.RouterIP,
-		DomainID: doc.DomainID,
+		RouterIp: doc.RouterIP,
+		DomainId: doc.DomainID,
 		PeerHash: doc.PeerHash,
-		PeerIP: doc.PeerIP,
-		PeerASN: doc.PeerASN,
+		PeerIp: doc.PeerIP,
+		PeerAsn: doc.PeerASN,
 		Timestamp: doc.Timestamp,
-		IGPRouterID: doc.IGPRouterID,
-		LocalNodeASN: doc.LocalNodeASN,
+		IgpRouterId: doc.IGPRouterID,
+		LocalNodeAsn: doc.LocalNodeASN,
 		Protocol: doc.Protocol,
 		Nexthop: doc.Nexthop,
 		LocalNodeHash: doc.LocalNodeHash,
-		MTID: convertMTID(doc.MTID),
-		IGPFlags: doc.IGPFlags,
+		Mtid: convertMtid(doc.MTID),
+		IgpFlags: doc.IGPFlags,
 		IsPrepolicy: doc.IsPrepolicy,
-		IsAdjRIBIn: doc.IsAdjRIBIn,
-		SRv6SID: doc.SRv6SID,
+		IsAdjRibIn: doc.IsAdjRIBIn,
+		Srv6Sid: doc.SRv6SID,
 	}
 }
 
-func ConvertLSNodeEdge(doc arango.LSNodeEdge) LSNodeEdge {
-	return LSNodeEdge{
+func ConvertLsNodeEdge(doc arango.LSNodeEdge) LsNodeEdge {
+	return LsNodeEdge{
 		Key: doc.Key,
-		ID: doc.ID,
+		Id: doc.ID,
 		From: doc.From,
 		To: doc.To,
 		Link: doc.Link,

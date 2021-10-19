@@ -3,11 +3,11 @@ package class
 type Class string
 
 const (
-	LSNode Class = "LSNode"
-	LSLink Class = "LSLink"
-	LSPrefix Class = "LSPrefix"
-	LSSRv6SID Class = "LSSRv6SID"
-	LSNodeEdge Class = "LSNodeEdge"
+	LsNode Class = "LsNode"
+	LsLink Class = "LsLink"
+	LsPrefix Class = "LsPrefix"
+	LsSrv6Sid Class = "LsSrv6Sid"
+	LsNodeEdge Class = "LsNodeEdge"
 	PhysicalInterface Class = "PhysicalInterface"
 	LoopbackInterface Class = "LoopbackInterface"
 )

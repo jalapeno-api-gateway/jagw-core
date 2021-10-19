@@ -2,22 +2,22 @@ package topology
 
 import "encoding/json"
 
-func (doc LSNode) MarshalBinary() ([]byte, error) {
+func (doc LsNode) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }
 
-func (doc LSLink) MarshalBinary() ([]byte, error) {
+func (doc LsLink) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }
 
-func (doc LSPrefix) MarshalBinary() ([]byte, error) {
+func (doc LsPrefix) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }
 
-func (doc LSSRv6SID) MarshalBinary() ([]byte, error) {
+func (doc LsSrv6Sid) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }
 
-func (doc LSNodeEdge) MarshalBinary() ([]byte, error) {
+func (doc LsNodeEdge) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }

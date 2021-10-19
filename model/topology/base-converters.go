@@ -2,18 +2,18 @@ package topology
 
 import "github.com/jalapeno-api-gateway/jagw-core/arango"
 
-func convertMTIDSlice(docs []*arango.MultiTopologyIdentifier) []*MultiTopologyIdentifier {
+func convertMtidSlice(docs []*arango.MultiTopologyIdentifier) []*MultiTopologyIdentifier {
 	mtids := []*MultiTopologyIdentifier{}
 	for _, doc := range docs {
-	   mtids = append(mtids, convertMTID(doc))
+	   mtids = append(mtids, convertMtid(doc))
 	}
 	return mtids
 }
 
-func convertMTID(doc *arango.MultiTopologyIdentifier) *MultiTopologyIdentifier {
+func convertMtid(doc *arango.MultiTopologyIdentifier) *MultiTopologyIdentifier {
 	return &MultiTopologyIdentifier{
 		OFlag: doc.OFlag,
 		AFlag: doc.AFlag,
-		MTID: doc.MTID,
+		Mtid: doc.MTID,
 	}
 }

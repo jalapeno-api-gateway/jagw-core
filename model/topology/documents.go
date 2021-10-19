@@ -1,97 +1,97 @@
 package topology
 
-type LSNode struct {
-	ID			string
+type LsNode struct {
+	Id			string
 	Key			string
 	RouterHash	string
-	DomainID	int64
-	RouterIP	string
+	DomainId	int64
+	RouterIp	string
 	PeerHash	string
-	PeerIP		string
-	PeerASN		int32
+	PeerIp		string
+	PeerAsn		int32
 	Timestamp	string
-	IGPRouterID	string
-	ASN			uint32
-	MTID		[]*MultiTopologyIdentifier
-	AreaID		string
+	IgpRouterId	string
+	Asn			uint32
+	Mtid		[]*MultiTopologyIdentifier
+	AreaId		string
 	Protocol	string
-	ProtocolID	uint8
+	ProtocolId	uint8
 	Name		string
 	IsPrepolicy	bool
-	IsAdjRIBIn	bool
+	IsAdjRibIn	bool
 }
 
-type LSLink struct {
-	ID					string
+type LsLink struct {
+	Id					string
 	Key					string
 	RouterHash			string
-	RouterIP			string
-	DomainID			int64
+	RouterIp			string
+	DomainId			int64
 	PeerHash			string
-	PeerIP				string
-	PeerASN				int32
+	PeerIp				string
+	PeerAsn				int32
 	Timestamp			string
-	IGPRouterID			string
+	IgpRouterId			string
 	Protocol			string
-	AreaID				string
+	AreaId				string
 	Nexthop				string
-	MTID				*MultiTopologyIdentifier
-	LocalLinkIP			string
-	RemoteLinkIP		string
-	IGPMetric			uint32
+	Mtid				*MultiTopologyIdentifier
+	LocalLinkIp			string
+	RemoteLinkIp		string
+	IgpMetric			uint32
 	RemoteNodeHash		string
 	LocalNodeHash		string
-	RemoteIGPRouterID	string
+	RemoteIgpRouterId	string
 }
 
-type LSPrefix struct {
+type LsPrefix struct {
 	Key                  string
-	ID                   string
+	Id                   string
 	RouterHash           string
-	RouterIP             string
-	DomainID             int64
+	RouterIp             string
+	DomainId             int64
 	PeerHash             string
-	PeerIP               string
-	PeerASN              int32
+	PeerIp               string
+	PeerAsn              int32
 	Timestamp            string
-	IGPRouterID          string
+	IgpRouterId          string
 	Protocol             string
-	AreaID               string
+	AreaId               string
 	Nexthop              string
 	LocalNodeHash        string
-	MTID                 *MultiTopologyIdentifier
+	Mtid                 *MultiTopologyIdentifier
 	Prefix               string
 	PrefixLen            int32
 	PrefixMetric         uint32
 	IsPrepolicy          bool
-	IsAdjRIBIn           bool
+	IsAdjRibIn           bool
 }
 
-type LSSRv6SID struct {
+type LsSrv6Sid struct {
 	Key                  string
-	ID                   string
+	Id                   string
 	RouterHash           string
-	RouterIP             string
-	DomainID             int64
+	RouterIp             string
+	DomainId             int64
 	PeerHash             string
-	PeerIP               string
-	PeerASN              int32
+	PeerIp               string
+	PeerAsn              int32
 	Timestamp            string
-	IGPRouterID          string
-	LocalNodeASN         uint32
+	IgpRouterId          string
+	LocalNodeAsn         uint32
 	Protocol             string
 	Nexthop              string
 	LocalNodeHash        string
-	MTID                 *MultiTopologyIdentifier
-	IGPFlags             uint8
+	Mtid                 *MultiTopologyIdentifier
+	IgpFlags             uint8
 	IsPrepolicy          bool
-	IsAdjRIBIn           bool
-	SRv6SID              string
+	IsAdjRibIn           bool
+	Srv6Sid              string
 }
 
-type LSNodeEdge struct {
+type LsNodeEdge struct {
 	Key                  string
-	ID                   string
+	Id                   string
 	To					 string
 	From	             string
 	Link				 string
