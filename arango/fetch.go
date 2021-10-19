@@ -100,7 +100,7 @@ func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
 }
 
 func FetchAllLsNodeEdges(ctx context.Context) []LSNode_Edge {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNodeEdge RETURN d");
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Edge RETURN d");
 	var documents []LSNode_Edge
 	for {
 		var document LSNode_Edge
