@@ -75,7 +75,7 @@ func ConvertLsPrefix(doc arango.LSPrefix) LsPrefix {
 	}
 }
 
-func ConvertLsSRv6SID(doc arango.LSSRv6SID) LsSrv6Sid {
+func ConvertLsSrv6Sid(doc arango.LSSRv6SID) LsSrv6Sid {
 	return LsSrv6Sid{
 		Key: doc.Key,
 		Id: doc.ID,
