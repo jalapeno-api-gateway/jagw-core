@@ -97,3 +97,11 @@ type LSNode_Edge struct {
 	To		             string						`json:"_to,omitempty"`
 	Link	             string						`json:"link,omitempty"`
 }
+
+type LSNode_Coordinates struct {
+	Key                  string						`json:"_key,omitempty"`
+	ID                   string						`json:"_id,omitempty"`
+	LsNodeKey	         string						`json:"lsnode_key,omitempty"`
+	Latitude			 float64					`json:"latitude,omitempty"`
+	Longitude	         float64					`json:"longitude,omitempty"`
+}

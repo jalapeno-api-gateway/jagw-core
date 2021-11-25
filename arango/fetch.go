@@ -15,6 +15,13 @@ func FetchLsNode(ctx context.Context, key string) LSNode {
 	return document
 }
 
+func FetchLsNodeCoordinates(ctx context.Context, key string) LSNode_Coordinates {
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Coordinates FILTER d._key == \"" + key + "\" RETURN d");
+	var document LSNode_Coordinates
+	readDocument(cursor.ReadDocument(ctx, &document))
+	return document
+}
+
 func FetchLsLink(ctx context.Context, key string) LSLink {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSLink FILTER d._key == \"" + key + "\" RETURN d");
 	var document LSLink
@@ -59,6 +66,20 @@ func FetchAllLsNodes(ctx context.Context) []LSNode {
 	}
 	return documents
 }
+
+func FetchAllLsNodeCoordinates(ctx context.Context) []LSNode_Coordinates {
+	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Coordinates RETURN d");
+	var documents []LSNode_Coordinates
+	for {
+		var document LSNode_Coordinates
+		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+			break
+		}
+		documents = append(documents, document)
+	}
+	return documents
+}
+
 
 func FetchAllLsLinks(ctx context.Context) []LSLink {
 	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSLink RETURN d");
