@@ -6,6 +6,10 @@ func (doc LsNode) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }
 
+func (doc LsNodeCoordinates) MarshalBinary() ([]byte, error) {
+	return json.Marshal(doc)
+}
+
 func (doc LsLink) MarshalBinary() ([]byte, error) {
 	return json.Marshal(doc)
 }

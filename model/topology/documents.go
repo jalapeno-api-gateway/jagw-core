@@ -21,6 +21,14 @@ type LsNode struct {
 	IsAdjRibIn	bool
 }
 
+type LsNodeCoordinates struct {
+	Id			string
+	Key			string
+	LsNodeKey	string
+	Latitude	float64
+	Longitude	float64
+}
+
 type LsLink struct {
 	Id					string
 	Key					string
