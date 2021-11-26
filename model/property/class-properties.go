@@ -97,6 +97,14 @@ var AllLsNodeEdgeProperties = []string{
 	Link,
 }
 
+var AllLsNodeCoordinatesProperties = []string{
+	Key,
+	Id,
+	LsNodeKey,
+	Latitude,
+	Longitude,
+}
+
 var AllPhysicalInterfaceProperties = []string{
 	DataRate,
 	PacketsSent,

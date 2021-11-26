@@ -25,6 +25,16 @@ func ConvertLsNode(doc arango.LSNode) LsNode {
 	}
 }
 
+func ConvertLsNodeCoordinates(doc arango.LSNode_Coordinates) LsNodeCoordinates {
+	return LsNodeCoordinates{
+		Id: doc.ID,
+		Key: doc.Key,
+		LsNodeKey: doc.LsNodeKey,
+		Latitude: doc.Latitude,
+		Longitude: doc.Longitude,
+	}
+}
+
 func ConvertLsLink(doc arango.LSLink) LsLink {
 	return LsLink{
 		Id: doc.ID,

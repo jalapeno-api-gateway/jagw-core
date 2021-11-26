@@ -40,4 +40,7 @@ const (
 	From = "From"
 	To = "To"
 	Link = "Link"
+	LsNodeKey = "LsNodeKey"
+	Latitude = "Latitude"
+	Longitude = "Longitude"
 )
