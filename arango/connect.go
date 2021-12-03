@@ -22,8 +22,9 @@ func InitializeArangoDbAdapter(config ArangoDbConfig) {
 }
 
 func queryArangoDbDatabase(ctx context.Context, query string) driver.Cursor {
-	db := openArangoDbDatabase(ctx)
-	cursor, err := db.Query(ctx, query, nil)
+	ctxx := context.WithValue(ctx, "arangodb-query-batchSize", 10000) // temporary solution, increasing batch size to 10'000
+	db := openArangoDbDatabase(ctxx)
+	cursor, err := db.Query(ctxx, query, nil)
 	if err != nil {
 		log.Fatalf("Could not create Cursor , %v", err)
 	}
