@@ -21,6 +21,7 @@ var Logger *logrus.Logger
 func InitializeArangoDbAdapter(logger *logrus.Logger, config ArangoDbConfig) {
 	Config = config
 	Logger = logger
+	logger.WithFields(logrus.Fields{"server": config.Server, "user": config.User, "dbName": config.DbName}).Debug("Initializing ArangoDb Adapter.")
 }
 
 func queryArangoDbDatabase(ctx context.Context, logger *logrus.Entry, queryString string) driver.Cursor {
