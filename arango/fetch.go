@@ -2,6 +2,8 @@ package arango
 
 import (
 	"context"
+
+	"github.com/sirupsen/logrus"
 )
 
 //
@@ -9,44 +11,68 @@ import (
 //
 
 func FetchLsNode(ctx context.Context, key string) LSNode {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSNode FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSNode
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
 func FetchLsNodeCoordinates(ctx context.Context, key string) LSNode_Coordinates {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Coordinates FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSNode_Coordinates FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSNode_Coordinates
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
 func FetchLsLink(ctx context.Context, key string) LSLink {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSLink FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSLink FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSLink
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
 func FetchLsPrefix(ctx context.Context, key string) LSPrefix {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSPrefix FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSPrefix FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSPrefix
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
 func FetchLsSrv6Sid(ctx context.Context, key string) LSSRv6SID {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSSRv6SID FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSSRv6SID FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSSRv6SID
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
 func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Edge FILTER d._key == \"" + key + "\" RETURN d");
+	queryString := "FOR d IN LSNode_Edge FILTER d._key == \"" + key + "\" RETURN d"
+	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var document LSNode_Edge
-	readDocument(cursor.ReadDocument(ctx, &document))
+	doc, err := cursor.ReadDocument(ctx, &document)
+	verifyDocument(logger, doc, err)
 	return document
 }
 
@@ -55,11 +81,15 @@ func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
 //
 
 func FetchAllLsNodes(ctx context.Context) []LSNode {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode RETURN d");
+	queryString := "FOR d IN LSNode RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSNode
 	for {
 		var document LSNode
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
@@ -68,11 +98,15 @@ func FetchAllLsNodes(ctx context.Context) []LSNode {
 }
 
 func FetchAllLsNodeCoordinates(ctx context.Context) []LSNode_Coordinates {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Coordinates RETURN d");
+	queryString := "FOR d IN LSNode_Coordinates RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSNode_Coordinates
 	for {
 		var document LSNode_Coordinates
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
@@ -82,11 +116,15 @@ func FetchAllLsNodeCoordinates(ctx context.Context) []LSNode_Coordinates {
 
 
 func FetchAllLsLinks(ctx context.Context) []LSLink {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSLink RETURN d");
+	queryString := "FOR d IN LSLink RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSLink
 	for {
 		var document LSLink
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
@@ -95,11 +133,15 @@ func FetchAllLsLinks(ctx context.Context) []LSLink {
 }
 
 func FetchAllLsPrefixes(ctx context.Context) []LSPrefix {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSPrefix RETURN d");
+	queryString := "FOR d IN LSPrefix RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSPrefix
 	for {
 		var document LSPrefix
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
@@ -108,11 +150,15 @@ func FetchAllLsPrefixes(ctx context.Context) []LSPrefix {
 }
 
 func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSSRv6SID RETURN d");
+	queryString := "FOR d IN LSSRv6SID RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSSRv6SID
 	for {
 		var document LSSRv6SID
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
@@ -121,11 +167,15 @@ func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
 }
 
 func FetchAllLsNodeEdges(ctx context.Context) []LSNode_Edge {
-	cursor := queryArangoDbDatabase(ctx, "FOR d IN LSNode_Edge RETURN d");
+	queryString := "FOR d IN LSNode_Edge RETURN d"
+	logger := Logger.WithField("queryString", queryString)
+
+	cursor := queryArangoDbDatabase(ctx, logger, queryString);
 	var documents []LSNode_Edge
 	for {
 		var document LSNode_Edge
-		if (!readDocument(cursor.ReadDocument(ctx, &document))) {
+		doc, err := cursor.ReadDocument(ctx, &document)
+		if (!verifyDocument(logger, doc, err)) {
 			break
 		}
 		documents = append(documents, document)
