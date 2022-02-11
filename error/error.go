@@ -1,6 +1,8 @@
 package error
 
 import (
+	"strings"
+
 	"google.golang.org/grpc/codes"
 )
 
@@ -21,10 +23,14 @@ type Error struct {
 	Message   string
 }
 
-type KeyNotFoundError struct {
-	ErrorCode 	ErrorCode
-	Message 	string
-	Keys 		[]string
+func CreateErrorForKeysNotFound(keys []string) *Error {
+	keysString := strings.Join(keys, ", ")
+	message := "Unable to find the following keys: " + keysString
+
+	return &Error{
+		ErrorCode: NOT_FOUND,
+		Message: message,
+	}
 }
 
 func GetGrpcErrorCode(err Error) codes.Code {
