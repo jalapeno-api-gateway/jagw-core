@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type ErrorCode string
@@ -37,7 +38,11 @@ func CreateErrorForKeysNotFound(keys []string) *Error {
 	}
 }
 
-func GetGrpcErrorCode(err Error) codes.Code {
+func GetGrpcError(err *Error) error {
+	return status.Errorf(GetGrpcErrorCode(err), err.Message)
+}
+
+func GetGrpcErrorCode(err *Error) codes.Code {
 	switch err.ErrorCode {
 	case "INVALID_ARGUMENT":
 		return codes.InvalidArgument
