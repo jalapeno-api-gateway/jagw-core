@@ -24,6 +24,10 @@ type Error struct {
 }
 
 func CreateErrorForKeysNotFound(keys []string) *Error {
+	if len(keys) == 0 {
+		return nil
+	}
+	
 	keysString := strings.Join(keys, ", ")
 	message := "Unable to find the following keys: " + keysString
 
