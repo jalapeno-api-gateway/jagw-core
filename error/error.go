@@ -21,6 +21,12 @@ type Error struct {
 	Message   string
 }
 
+type KeyNotFoundError struct {
+	ErrorCode 	ErrorCode
+	Message 	string
+	Keys 		[]string
+}
+
 func GetGrpcErrorCode(err Error) codes.Code {
 	switch err.ErrorCode {
 	case "INVALID_ARGUMENT":
