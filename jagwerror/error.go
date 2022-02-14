@@ -39,6 +39,9 @@ func CreateErrorForKeysNotFound(keys []string) *Error {
 }
 
 func GetGrpcError(err *Error) error {
+	if err == nil {
+		return nil
+	}
 	return status.Errorf(GetGrpcErrorCode(err), err.Message)
 }
 
