@@ -1,8 +1,6 @@
 package jagwerror
 
 import (
-	"strings"
-
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -22,20 +20,6 @@ const (
 type Error struct {
 	ErrorCode ErrorCode
 	Message   string
-}
-
-func CreateErrorForKeysNotFound(keys []string) *Error {
-	if len(keys) == 0 {
-		return nil
-	}
-
-	keysString := strings.Join(keys, ", ")
-	message := "Unable to find the following keys: " + keysString
-
-	return &Error{
-		ErrorCode: NOT_FOUND,
-		Message: message,
-	}
 }
 
 func GetGrpcError(err *Error) error {
