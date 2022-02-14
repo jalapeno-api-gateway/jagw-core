@@ -26,8 +26,9 @@ func InitializeArangoDbAdapter(logger *logrus.Logger, config ArangoDbConfig) {
 
 func queryArangoDbDatabase(ctx context.Context, logger *logrus.Entry, queryString string) driver.Cursor {
 	logger.Debug("Querying ArangoDb.")
-	db := openArangoDbDatabase(ctx)
-	cursor, err := db.Query(ctx, queryString, nil)
+	ctxx := context.WithValue(ctx, "arangodb-query-batchSize", 10000) // temporary solution, increasing batch size to 10'000
+	db := openArangoDbDatabase(ctxx)
+	cursor, err := db.Query(ctxx, queryString, nil)
 	if err != nil {
 		logger.WithError(err).Panic("Failed to create Cursor for ArangoDb.")
 	}
