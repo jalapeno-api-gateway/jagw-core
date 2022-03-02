@@ -11,7 +11,7 @@ import (
 //
 
 func FetchLsNode(ctx context.Context, key string) LSNode {
-	queryString := "FOR d IN LSNode FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_node FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -22,7 +22,7 @@ func FetchLsNode(ctx context.Context, key string) LSNode {
 }
 
 func FetchLsNodeCoordinates(ctx context.Context, key string) LSNode_Coordinates {
-	queryString := "FOR d IN LSNode_Coordinates FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_node_coordinates FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -33,7 +33,7 @@ func FetchLsNodeCoordinates(ctx context.Context, key string) LSNode_Coordinates 
 }
 
 func FetchLsLink(ctx context.Context, key string) LSLink {
-	queryString := "FOR d IN LSLink FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_link FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -44,7 +44,7 @@ func FetchLsLink(ctx context.Context, key string) LSLink {
 }
 
 func FetchLsPrefix(ctx context.Context, key string) LSPrefix {
-	queryString := "FOR d IN LSPrefix FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_prefix FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -55,7 +55,7 @@ func FetchLsPrefix(ctx context.Context, key string) LSPrefix {
 }
 
 func FetchLsSrv6Sid(ctx context.Context, key string) LSSRv6SID {
-	queryString := "FOR d IN LSSRv6SID FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_srv6_sid FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -66,7 +66,7 @@ func FetchLsSrv6Sid(ctx context.Context, key string) LSSRv6SID {
 }
 
 func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
-	queryString := "FOR d IN LSNode_Edge FILTER d._key == \"" + key + "\" RETURN d"
+	queryString := "FOR d IN ls_node_edge FILTER d._key == \"" + key + "\" RETURN d"
 	logger := Logger.WithFields(logrus.Fields{"key": key, "queryString": queryString})
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -81,7 +81,7 @@ func FetchLsNodeEdge(ctx context.Context, key string) LSNode_Edge {
 //
 
 func FetchAllLsNodes(ctx context.Context) []LSNode {
-	queryString := "FOR d IN LSNode RETURN d"
+	queryString := "FOR d IN ls_node RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -98,7 +98,7 @@ func FetchAllLsNodes(ctx context.Context) []LSNode {
 }
 
 func FetchAllLsNodeCoordinates(ctx context.Context) []LSNode_Coordinates {
-	queryString := "FOR d IN LSNode_Coordinates RETURN d"
+	queryString := "FOR d IN ls_node_coordinates RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -116,7 +116,7 @@ func FetchAllLsNodeCoordinates(ctx context.Context) []LSNode_Coordinates {
 
 
 func FetchAllLsLinks(ctx context.Context) []LSLink {
-	queryString := "FOR d IN LSLink RETURN d"
+	queryString := "FOR d IN ls_link RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -133,7 +133,7 @@ func FetchAllLsLinks(ctx context.Context) []LSLink {
 }
 
 func FetchAllLsPrefixes(ctx context.Context) []LSPrefix {
-	queryString := "FOR d IN LSPrefix RETURN d"
+	queryString := "FOR d IN ls_prefix RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -150,7 +150,7 @@ func FetchAllLsPrefixes(ctx context.Context) []LSPrefix {
 }
 
 func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
-	queryString := "FOR d IN LSSRv6SID RETURN d"
+	queryString := "FOR d IN ls_srv6_sid RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
@@ -167,7 +167,7 @@ func FetchAllLsSrv6Sids(ctx context.Context) []LSSRv6SID {
 }
 
 func FetchAllLsNodeEdges(ctx context.Context) []LSNode_Edge {
-	queryString := "FOR d IN LSNode_Edge RETURN d"
+	queryString := "FOR d IN ls_node_edge RETURN d"
 	logger := Logger.WithField("queryString", queryString)
 
 	cursor := queryArangoDbDatabase(ctx, logger, queryString);
