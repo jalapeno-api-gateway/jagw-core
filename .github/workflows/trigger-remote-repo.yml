@@ -19,10 +19,12 @@ on:
         description: "dev | release"
         type: string
         required: true
-      protorepo_jagw_go_commit_sha:
+      protorepo_jagw_go_ref:
+        description: "Ref used by other go modules to import this version"
         type: string
         required: true
-      jagw_core_commit_sha:
+      jagw_core_ref:
+        description: "Ref used by other go modules to import this version"
         type: string
         required: true
     secrets:
@@ -45,6 +47,6 @@ jobs:
           github_user: mbongard
           workflow_file_name: ${{ inputs.workflow_file }}
           ref: dev
-          client_payload: '{"tag_name": "${{ inputs.tag_name }}", "build_branch": "${{ inputs.build_branch }}", "type": "${{ inputs.type }}", "protorepo_jagw_go_commit_sha": "${{ inputs.protorepo_jagw_go_commit_sha }}", "jagw_core_commit_sha": "${{ inputs.jagw_core_commit_sha }}"}'
+          client_payload: '{"tag_name": "${{ inputs.tag_name }}", "build_branch": "${{ inputs.build_branch }}", "type": "${{ inputs.type }}", "protorepo_jagw_go_ref": "${{ inputs.protorepo_jagw_go_ref }}", "jagw_core_ref": "${{ inputs.jagw_core_ref }}"}'
           propagate_failure: false
           wait_workflow: false
