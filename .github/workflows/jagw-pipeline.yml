@@ -40,8 +40,6 @@ jobs:
       (needs.call-merge-to-main.result == 'success' || needs.call-merge-to-main.result == 'skipped') &&
       needs.call-create-tag.result == 'success'
     with:
-      workflow_file: jagw-pipeline.yml
-      protorepo_jagw_go_ref: ${{ github.event.inputs.protorepo_jagw_go_commit_sha }}
       jagw_core_ref: ${{ needs.call-create-tag.outputs.jagw_core_ref }}
     secrets:
       pat_full_repo_access: ${{ secrets.PAT_FULL_REPO_ACCESS }}
