@@ -2,19 +2,6 @@ name: Create Tag
 
 on: 
   workflow_call:
-    inputs:
-      branch:
-        description: 'Name of the branch to create the tag on'
-        type: string
-        required: true
-      release_type:
-        description: 'Name of the tag to create'
-        type: string
-        required: true
-      tag_name:
-        description: 'Name of the tag to create'
-        type: string
-        required: true
     outputs:
       jagw_core_ref:
         description: "Ref used by other go modules to import this version"
@@ -29,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ inputs.branch }}  
+          ref: ${{ github.event.inputs.build_branch }}  
           fetch-depth: 0
       - name: Create tag
         uses: actions/github-script@v5
@@ -43,16 +30,16 @@ jobs:
               sha: context.sha
             })
         env:
-          TAG_NAME: "${{ inputs.tag_name }}"
+          TAG_NAME: "${{ github.event.inputs.tag_name }}"
       - name: Get SHA
         id: get-sha
         run: |
-          echo "::set-output name=commit_sha::$(git rev-list -n 1 ${{ inputs.tag_name }})"
+          echo "::set-output name=commit_sha::$(git rev-list -n 1 ${{ github.event.inputs.tag_name }})"
       - name: Get ref for Golang
         id: go-ref
         run: |
-          if [[ ${{ inputs.release_type }} == 'release' ]]; then
-            echo "::set-output name=jagw_core_ref::${{ inputs.tag_name }}"
+          if [[ ${{ github.event.inputs.release_or_dev }} == 'release' ]]; then
+            echo "::set-output name=jagw_core_ref::${{ github.event.inputs.tag_name }}"
           else
-            echo "::set-output name=jagw_core_ref::$(git rev-list -n 1 ${{ inputs.tag_name }})"
+            echo "::set-output name=jagw_core_ref::$(git rev-list -n 1 ${{ github.event.inputs.tag_name }})"
           fi
