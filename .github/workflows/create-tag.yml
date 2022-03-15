@@ -7,20 +7,24 @@ on:
         description: 'Name of the branch to create the tag on'
         type: string
         required: true
+      release_type:
+        description: 'Name of the tag to create'
+        type: string
+        required: true
       tag_name:
         description: 'Name of the tag to create'
         type: string
         required: true
     outputs:
-      commit_sha:
-        description: "SHA of latest commit"
-        value: ${{ jobs.create-tag.outputs.commit_sha }}
+      jagw_core_ref:
+        description: "Ref used by other go modules to import this version"
+        value: ${{ jobs.create-tag.outputs.jagw_core_ref }}
  
 jobs:
   create-tag:
     runs-on: ubuntu-latest
     outputs: 
-      commit_sha: ${{ steps.get-sha.outputs.commit_sha }}
+      jagw_core_ref: ${{ steps.get-sha.outputs.jagw_core_ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,3 +48,11 @@ jobs:
         id: get-sha
         run: |
           echo "::set-output name=commit_sha::$(git rev-list -n 1 ${{ inputs.tag_name }})"
+      - name: Get ref for Golang
+        id: go-ref
+        run: |
+          if [[ ${{ inputs.release_type }} == 'release' ]]; then
+            echo "::set-output name=jagw_core_ref::${{ inputs.tag_name }}"
+          else
+            echo "::set-output name=jagw_core_ref::$(git rev-list -n 1 ${{ inputs.tag_name }})"
+          fi
