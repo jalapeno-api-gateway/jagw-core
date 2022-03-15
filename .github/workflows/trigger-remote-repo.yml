@@ -1,0 +1,32 @@
+name: Trigger Remote Repo
+
+on: 
+  workflow_call:
+    inputs:
+      jagw_core_ref:
+        description: "Ref used by other go modules to import this version"
+        type: string
+        required: true
+    secrets:
+      pat_full_repo_access:
+        description: "A GitHub token with full repo access."
+        required: true
+  
+jobs:
+  trigger:
+    strategy:
+      matrix:
+        repo_name: [cache-service, request-service, subscription-service, jagw, demo-sr-app, sample-sr-apps]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: convictional/trigger-workflow-and-wait@v1.6.0
+        with:
+          owner: jalapeno-api-gateway
+          repo: ${{ matrix.repo_name }}
+          github_token: ${{ secrets.pat_full_repo_access }}
+          github_user: mbongard
+          workflow_file_name: jagw-pipeline.yml
+          ref: dev
+          client_payload: '{"tag_name": "${{ github.event.inputs.tag_name }}", "build_branch": "${{ github.event.inputs.build_branch }}", "release_or_dev": "${{ github.event.inputs.release_or_dev }}", "protorepo_jagw_go_ref": "${{ github.event.inputs.protorepo_jagw_go_ref }}", "jagw_core_ref": "${{ inputs.jagw_core_ref }}"}'
+          propagate_failure: false
+          wait_workflow: false

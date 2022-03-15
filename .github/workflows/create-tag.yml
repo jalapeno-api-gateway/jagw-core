@@ -1,0 +1,46 @@
+name: Create Tag
+
+on: 
+  workflow_call:
+    outputs:
+      jagw_core_ref:
+        description: "Ref used by other go modules to import this version"
+        value: ${{ jobs.create-tag.outputs.jagw_core_ref }}
+ 
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    outputs: 
+      jagw_core_ref: ${{ steps.go-ref.outputs.jagw_core_ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.build_branch }}  
+          fetch-depth: 0
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { TAG_NAME } = process.env
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${ TAG_NAME }`,
+              sha: context.sha
+            })
+        env:
+          TAG_NAME: "${{ github.event.inputs.tag_name }}"
+      - name: Get SHA
+        id: get-sha
+        run: |
+          echo "::set-output name=commit_sha::$(git rev-list -n 1 ${{ github.event.inputs.tag_name }})"
+      - name: Get ref for Golang
+        id: go-ref
+        run: |
+          git fetch --all --tags
+          if [[ ${{ github.event.inputs.release_or_dev }} == 'release' ]]; then
+            echo "::set-output name=jagw_core_ref::${{ github.event.inputs.tag_name }}"
+          else
+            echo "::set-output name=jagw_core_ref::$(git rev-list -n 1 ${{ github.event.inputs.tag_name }})"
+          fi
