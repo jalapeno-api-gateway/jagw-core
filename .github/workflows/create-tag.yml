@@ -24,7 +24,7 @@ jobs:
   create-tag:
     runs-on: ubuntu-latest
     outputs: 
-      jagw_core_ref: ${{ steps.get-sha.outputs.jagw_core_ref }}
+      jagw_core_ref: ${{ steps.go-ref.outputs.jagw_core_ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
