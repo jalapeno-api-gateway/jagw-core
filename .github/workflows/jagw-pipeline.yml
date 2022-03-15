@@ -1,0 +1,52 @@
+name: JAGW Pipieline
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:   
+        required: true
+        type: string
+      build_branch:
+        description: "Build branch (dev | main)"
+        required: true
+        type: string
+      type:
+        description: "Type (dev | release)"
+        required: true
+        type: string
+
+jobs:
+  call-merge-to-main:
+    if: github.event.inputs.type == 'release'
+    uses: jalapeno-api-gateway/jagw-core/.github/workflows/merge-to-main.yml@dev
+    with:
+      source_branch: dev
+      destination_branch: main
+  call-create-tag:
+    needs: [call-merge-to-main]
+    uses: jalapeno-api-gateway/jagw-core/.github/workflows/create-tag.yml@dev   
+    if: |
+      always() &&
+      (needs.call-merge-to-main.result == 'success' || needs.call-merge-to-main.result == 'skipped')
+    with:
+      branch: ${{ github.event.inputs.build_branch }}
+      tag_name: ${{ github.event.inputs.tag_name }}
+  call-create-release:
+    needs: [call-merge-to-main, call-create-tag]
+    uses: jalapeno-api-gateway/jagw-core/.github/workflows/create-release.yml@dev
+    with:
+      tag_name: ${{ github.event.inputs.tag_name }}
+  call-trigger-remote-repo:
+    needs: [call-create-tag]
+    uses: jalapeno-api-gateway/jagw-core/.github/workflows/trigger-remote-repo.yml@dev
+    if: |
+      always() &&
+      (needs.call-merge-to-main.result == 'success' || needs.call-merge-to-main.result == 'skipped') &&
+      needs.call-create-tag.result == 'success'
+    with:
+      workflow_file: jagw-pipeline.yml
+      tag_name: ${{ github.event.inputs.tag_name }}
+      build_branch: ${{ github.event.inputs.build_branch }}
+      type: ${{ github.event.inputs.type }}
+    secrets:
+      pat_full_repo_access: ${{ secrets.PAT_FULL_REPO_ACCESS }}
