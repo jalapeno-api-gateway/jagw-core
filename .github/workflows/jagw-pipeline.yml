@@ -14,7 +14,7 @@ on:
         description: "Type (dev | release)"
         required: true
         type: string
-      protorepo_jagw_go_commit_sha:
+      protorepo_jagw_go_ref:
         required: true
         type: string
 
@@ -29,6 +29,7 @@ jobs:
       always() &&
       (needs.call-merge-to-main.result == 'success' || needs.call-merge-to-main.result == 'skipped')
     with:
+      release_type: ${{ github.event.inputs.release_type }}
       branch: ${{ github.event.inputs.build_branch }}
       tag_name: ${{ github.event.inputs.tag_name }}
   call-create-release:
@@ -48,7 +49,7 @@ jobs:
       tag_name: ${{ github.event.inputs.tag_name }}
       build_branch: ${{ github.event.inputs.build_branch }}
       type: ${{ github.event.inputs.type }}
-      protorepo_jagw_go_commit_sha: ${{ github.event.inputs.protorepo_jagw_go_commit_sha }}
-      jagw_core_commit_sha: ${{ needs.call-create-tag.outputs.commit_sha }}
+      protorepo_jagw_go_ref: ${{ github.event.inputs.protorepo_jagw_go_commit_sha }}
+      jagw_core_ref: ${{ needs.call-create-tag.outputs.jagw_core_ref }}
     secrets:
       pat_full_repo_access: ${{ secrets.PAT_FULL_REPO_ACCESS }}
