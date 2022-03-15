@@ -23,9 +23,4 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ github.token }}"
           PULL_REQUEST: "${{ steps.create-pull-request.outputs.pr_number }}"
-      - name: Delete source branch
-        if: ${{ inputs.delete_source_branch }}
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{ github.token }}
-          branches: ${{ inputs.source_branch }}
+
