@@ -38,6 +38,7 @@ jobs:
       - name: Get ref for Golang
         id: go-ref
         run: |
+          git fetch --all --tags
           if [[ ${{ github.event.inputs.release_or_dev }} == 'release' ]]; then
             echo "::set-output name=jagw_core_ref::${{ github.event.inputs.tag_name }}"
           else
