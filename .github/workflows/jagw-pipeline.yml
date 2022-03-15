@@ -19,9 +19,6 @@ jobs:
   call-merge-to-main:
     if: github.event.inputs.type == 'release'
     uses: jalapeno-api-gateway/jagw-core/.github/workflows/merge-to-main.yml@dev
-    with:
-      source_branch: dev
-      destination_branch: main
   call-create-tag:
     needs: [call-merge-to-main]
     uses: jalapeno-api-gateway/jagw-core/.github/workflows/create-tag.yml@dev   
