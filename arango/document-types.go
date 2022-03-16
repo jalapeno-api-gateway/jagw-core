@@ -1,5 +1,7 @@
 package arango
 
+// Information on Collections is taken from here:
+// https://github.com/sbezverk/gobmp/blob/master/pkg/message/types.go
 type LSNode struct {
 	ID				string							`json:"_id,omitempty"`
 	Key				string							`json:"_key,omitempty"`

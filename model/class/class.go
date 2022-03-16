@@ -2,6 +2,8 @@ package class
 
 type Class string
 
+
+// These classes must match the name of the collections in the ArangoDb (i.e. ls_node)
 const (
 	LsNode Class = "ls_node"
 	LsLink Class = "ls_link"
