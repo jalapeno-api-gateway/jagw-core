@@ -1,9 +1,6 @@
 package logger
 
 import (
-	"fmt"
-	"path"
-	"runtime"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -11,12 +8,10 @@ import (
 
 func Init(l *logrus.Logger, logLevel string) {
 	l.SetReportCaller(true)
-	l.SetFormatter(&logrus.JSONFormatter{
-		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
-			filename := path.Base(f.File)
-			return fmt.Sprintf("%s()", f.Function), fmt.Sprintf("%s:%d", filename, f.Line)
-		},
-	})
+	customFormatter := new(logrus.TextFormatter)
+	customFormatter.TimestampFormat = "2006-01-02 15:04:05"
+	customFormatter.FullTimestamp = true
+	logrus.SetFormatter(customFormatter)
 	l.SetLevel(getLogrusLogLevel(logLevel))
 }
 
